@@ -1,0 +1,7 @@
+zuul:
+  routes:
+    theology-service:
+        path: /**
+        serviceId: theology
+server:
+  port: 8083
