@@ -1,7 +1,9 @@
 package com.itimoshin.spring_cloud_mastering.examinator;
 
+import com.itimoshin.spring_cloud_mastering.examinator.client.ExamServiceClient;
+import com.itimoshin.spring_cloud_mastering.examinator.client.MathServiceClient;
+import com.itimoshin.spring_cloud_mastering.examinator.client.TheologyServiceClient;
 import com.itimoshin.spring_cloud_mastering.examinator.model.Exercise;
-import feign.Feign;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,22 +22,29 @@ public class ExerciseController {
     private final DiscoveryClient discoveryClient;
     private final RestTemplate restTemplate;
     private final String examinatorMessage;
+    private final Map<ExamType, ExamServiceClient> examClientMap;
 
 
     public ExerciseController(DiscoveryClient discoveryClient, RestTemplate restTemplate,
-                              @Value("${examinator.message}") String examinatorMessage) {
+                              @Value("${examinator.message}") String examinatorMessage,
+                              TheologyServiceClient theologyServiceClient,
+                              MathServiceClient mathServiceClient) {
         this.discoveryClient = discoveryClient;
         this.restTemplate = restTemplate;
         this.examinatorMessage = examinatorMessage;
+
+        Map<ExamType, ExamServiceClient> examServiceClientMap = new HashMap<>();
+        examServiceClientMap.put(ExamType.THEOLOGY, theologyServiceClient);
+        examServiceClientMap.put(ExamType.MATH, mathServiceClient);
+        this.examClientMap = Collections.unmodifiableMap(examServiceClientMap);
     }
 
     @GetMapping("/all-subjects")
-    public Map<String, Exercise[]> allSubjectsExercises() {
+    public Map<String, List<Exercise>> allSubjectsExercises() {
         System.out.println(examinatorMessage);
-        Feign.builder().target(ExamClient.class, "");
-        Map<String, Exercise[]> result = new HashMap<>();
+        Map<String, List<Exercise>> result = new HashMap<>();
         for (ExamType value : ExamType.values()) {
-            result.put(value.name(), restTemplate.getForEntity( "http://"+ value.serviceName + "/exercise/random?count=5", Exercise[].class, new HashMap<>()).getBody());
+            result.put(value.name(), examClientMap.get(value).getExercises(5));
         }
         return result;
     }

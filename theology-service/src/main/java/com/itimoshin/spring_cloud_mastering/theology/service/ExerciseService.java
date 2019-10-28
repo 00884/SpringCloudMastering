@@ -4,7 +4,7 @@ import com.itimoshin.spring_cloud_mastering.theology.entity.Exercise;
 
 import java.util.List;
 
-public interface ExerciseService {
+public interface ExerciseService extends com.itimoshin.spring_cloud_mastering.exam_starter.service.ExerciseService {
 
     Exercise add(Exercise exercise);
 

@@ -1,7 +1,7 @@
 package com.itimoshin.spring_cloud_mastering.math.service.impl;
 
-import com.itimoshin.spring_cloud_mastering.math.model.Exercise;
-import com.itimoshin.spring_cloud_mastering.math.service.ExerciseService;
+import com.itimoshin.spring_cloud_mastering.exam_starter.service.ExerciseService;
+import com.itimoshin.spring_cloud_mastering.math.model.ExerciseImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
-    public List<Exercise> random(int count) {
+    public List<ExerciseImpl> random(int count) {
         final Random rnd = new Random();
         return IntStream.range(0, count)
                 .mapToObj((i) -> {
@@ -24,7 +24,7 @@ public class ExerciseServiceImpl implements ExerciseService {
                     int secondNum = rnd.nextInt() & Integer.MAX_VALUE;
                     String question = String.format("%s + %s = ?", firstNum, secondNum);
                     String answer = Integer.toString(firstNum + secondNum);
-                    return new Exercise(question, answer);
+                    return new ExerciseImpl(question, answer);
                 }).collect(Collectors.toList());
     }
 }

@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.itimoshin.spring_cloud_mastering.exam_starter.ExamStarterConfiguration

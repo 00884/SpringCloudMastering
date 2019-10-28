@@ -79,6 +79,7 @@
         <module>service-discovery</module>
         <module>config-service</module>
         <module>common</module>
+        <module>exam-starter</module>
     </modules>
 
 </project>

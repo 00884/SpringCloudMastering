@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/exercise")
-public class ExerciseController {
+public class TheologyExerciseController {
 
     private final ExerciseService exerciseService;
 
-    public ExerciseController(ExerciseService exerciseService) {
+    public TheologyExerciseController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
     }
 
@@ -25,11 +25,6 @@ public class ExerciseController {
     @GetMapping
     public List<Exercise> getAll() {
        return exerciseService.getAll();
-    }
-
-    @GetMapping("/random")
-    public List<Exercise> random(@RequestParam int count) {
-        return exerciseService.random(count);
     }
 
     @DeleteMapping("/{id}")

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "exercise")
-public class Exercise {
+public class Exercise implements com.itimoshin.spring_cloud_mastering.exam_starter.model.Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
