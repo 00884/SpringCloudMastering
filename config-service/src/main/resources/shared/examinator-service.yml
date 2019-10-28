@@ -7,3 +7,5 @@ zuul:
     math-service:
       path: /math/**
       serviceId: math-service
+
+examinator.message: Hello4
