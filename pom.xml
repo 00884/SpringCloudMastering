@@ -17,6 +17,14 @@
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.itimoshin</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -25,6 +33,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>1.4.7.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -41,11 +54,26 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <modules>
         <module>examinator-service</module>
         <module>theology-service</module>
+        <module>math-service</module>
         <module>service-discovery</module>
         <module>config-service</module>
+        <module>common</module>
     </modules>
 
 </project>

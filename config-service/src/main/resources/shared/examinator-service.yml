@@ -1,7 +1,9 @@
+#server.port: 8182
 zuul:
   routes:
     theology-service:
-        path: /**
-        serviceId: theology
-server:
-  port: 8083
+        path: /theology/**
+        serviceId: theology-service
+    math-service:
+      path: /math/**
+      serviceId: math-service
