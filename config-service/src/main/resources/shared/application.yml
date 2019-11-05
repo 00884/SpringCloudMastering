@@ -22,3 +22,4 @@ management:
       base-path: /act
       exposure:
         include: '*'
+testConfig: config-service-application-classpath

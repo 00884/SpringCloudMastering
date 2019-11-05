@@ -1,10 +1,9 @@
 spring:
-  profiles.include: default
   cloud:
     config:
       server:
         native:
-          search-locations: classpath:/shared
+          search-locations: [classpath:/shared, file:///C:\config\shared]
   profiles:
     active: native
 server:

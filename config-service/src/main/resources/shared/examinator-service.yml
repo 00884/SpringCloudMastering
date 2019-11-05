@@ -1,4 +1,4 @@
-#server.port: 8182
+server.port: 8182
 zuul:
   routes:
     theology-service:
@@ -9,3 +9,4 @@ zuul:
       serviceId: math-service
 
 examinator.message: Hello4
+testConfig: config-service-examinator-service-classpath
