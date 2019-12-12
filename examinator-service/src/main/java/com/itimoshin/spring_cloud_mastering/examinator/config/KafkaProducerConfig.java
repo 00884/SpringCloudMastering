@@ -1,6 +1,5 @@
 package com.itimoshin.spring_cloud_mastering.examinator.config;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.itimoshin.spring_cloud_mastering.examinator.model.KafkaDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
@@ -29,7 +28,7 @@ public class KafkaProducerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, org.springframework.kafka.support.serializer.JsonSerializer.class);
         props.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProducerId);
         return props;
     }

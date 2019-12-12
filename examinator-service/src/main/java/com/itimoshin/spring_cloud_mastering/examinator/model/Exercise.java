@@ -1,8 +1,5 @@
 package com.itimoshin.spring_cloud_mastering.examinator.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Exercise {
     private String question;
     private String answer;

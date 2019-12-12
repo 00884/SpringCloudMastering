@@ -1,7 +1,6 @@
 package com.itimoshin.spring_cloud_mastering.examinator.client;
 
 import com.itimoshin.spring_cloud_mastering.examinator.model.Exercise;
-import feign.Client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

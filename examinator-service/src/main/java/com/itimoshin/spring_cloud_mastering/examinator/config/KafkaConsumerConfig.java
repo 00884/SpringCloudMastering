@@ -25,6 +25,8 @@ public class KafkaConsumerConfig {
 
     @Value("${kafka.group.id}")
     private String kafkaGroupId;
+    @Value("${kafka.group2.id}")
+    private String kafkaGroupId2;
 
     @Bean
     public KafkaListenerContainerFactory<?> batchFactory() {
@@ -47,8 +49,23 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
+    public KafkaListenerContainerFactory<?> singleFactory2() {
+        ConcurrentKafkaListenerContainerFactory<Long, KafkaDto> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory2());
+        factory.setBatchListener(false);
+        factory.setMessageConverter(new StringJsonMessageConverter());
+        return factory;
+    }
+
+    @Bean
     public ConsumerFactory<Long, KafkaDto> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    }
+
+    @Bean
+    public ConsumerFactory<Long, KafkaDto> consumerFactory2() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs2());
     }
 
     @Bean
@@ -63,6 +80,17 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroupId);
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        return props;
+    }
+
+    @Bean
+    public Map<String, Object> consumerConfigs2() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroupId2);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         return props;
     }

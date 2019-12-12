@@ -1,5 +1,7 @@
 package com.itimoshin.spring_cloud_mastering.examinator;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -23,5 +25,10 @@ public class ExaminatorServiceApplication {
 	@LoadBalanced
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	@Bean
+	public JsonSerializer jsonSerializer() {
+		return new StringSerializer();
 	}
 }
